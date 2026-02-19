@@ -1,4 +1,3 @@
 /*    /index.html   200
 
-# Redirects above ensure SPA client-side routing returns index.html for all paths.
-# Netlify will serve the built `index.html` from the `dist` folder on all routes.
+# Redirect above ensures SPA client-side routing returns index.html for all paths.
