@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import CTAButtons from './CTAButtons'
 
 export default function ProductCard({ title, artist, image, price, href = '#', verified = false }) {
@@ -7,7 +7,7 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
 
   return (
     <>
-      <article className="relative bg-white rounded-lg overflow-hidden shadow-sm border border-slate-100 card-hover">
+      <article className="relative glass-card rounded-lg overflow-hidden shadow-sm border border-white/10 card-hover">
         <button onClick={() => setOpen(true)} className="block w-full h-36 sm:h-40 md:h-44 overflow-hidden relative">
           <img loading="lazy" src={image} alt={title} className="w-full h-full object-cover transform transition-transform hover:scale-105" />
           {price && (
@@ -15,7 +15,7 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
           )}
         </button>
 
-        <div className="p-3">
+          <div className="p-3">
           <h4 className="font-serif text-sm text-slate-900 line-clamp-2">{title}</h4>
           <div className="flex items-center justify-between mt-1">
             <p className="text-xs muted-text">{artist}</p>
@@ -23,8 +23,8 @@ export default function ProductCard({ title, artist, image, price, href = '#', v
           </div>
 
           <div className="mt-3 flex items-center gap-2">
-            <button onClick={() => setOpen(true)} className="text-xs px-3 py-2 bg-slate-900 text-white rounded-md">Quick View</button>
-            <button className="text-xs px-3 py-2 border border-slate-200 rounded-md text-slate-900">Add</button>
+            <button onClick={() => setOpen(true)} className="text-xs px-3 py-2 bg-[#065F46] text-white rounded-md">Quick View</button>
+            <button className="text-xs px-3 py-2 border border-white/10 rounded-md text-white/90 bg-white/6">Add</button>
           </div>
         </div>
       </article>

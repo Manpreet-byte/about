@@ -57,7 +57,7 @@ export default function ProductDetail() {
         <div className="flex space-x-3 sm:space-x-4">
           {THUMBS.map((t, i) => (
             <button
-              key={t.src}
+              key={`${t.src}-${i}`}
               onClick={() => setActive(i)}
               className={`w-20 h-14 sm:w-28 sm:h-20 rounded-md overflow-hidden border ${i === active ? 'border-slate-800' : 'border-slate-200'} bg-white`}
               aria-label={`Thumbnail ${i + 1}`}
