@@ -97,7 +97,7 @@ export default function HorizontalScroll() {
               key={s.id}
               className="w-screen h-screen flex-shrink-0 flex items-center justify-center bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white px-6"
             >
-              <h1 className="hs-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
+              <h1 className="hs-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight">
                 {s.title}
               </h1>
             </section>

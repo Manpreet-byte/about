@@ -10,7 +10,7 @@ const sectionVariants = {
 export default function ArtistBioDetailed() {
   return (
     <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={sectionVariants} className="mt-10 bg-white p-6 rounded-lg border border-slate-200">
-      <h3 className="font-serif text-2xl text-slate-900 mb-4">About The Artist</h3>
+      <h3 className="font-serif text-3xl font-extrabold text-slate-900 mb-4">About The Artist</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
         <figure className="md:col-span-1 flex flex-col items-center md:sticky md:top-28 self-start">

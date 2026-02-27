@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion'
 import ProductCard from './ProductCard'
+import CollageGallery from './CollageGallery'
 
 const sample = [
   { id: 1, title: 'Tune Of Bengal — 4', artist: 'Sekhar Roy', image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1200&auto=format', price: '₹45,000' },
@@ -26,12 +27,17 @@ export default function FeaturedArtworks() {
         <h3 className="section-title">Featured Artworks</h3>
         <div className="section-sub">Hand-picked works from our collection</div>
 
-        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {sample.map((a) => (
-            <motion.div key={a.id} variants={item} className="w-full">
-              <ProductCard title={a.title} artist={a.artist} image={a.image} price={a.price} href="#" />
-            </motion.div>
-          ))}
+        <CollageGallery image={sample[0].image} thumbCount={6} />
+
+        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} className="masonry">
+          {sample.map((a, i) => {
+            const variant = i % 2 === 0 ? 'tall' : 'short'
+            return (
+              <motion.div key={a.id} variants={item} className="masonry-item enter-soft">
+                <ProductCard title={a.title} artist={a.artist} image={a.image} price={a.price} href="#" variant={variant} />
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
     </section>

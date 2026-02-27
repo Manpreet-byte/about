@@ -25,6 +25,8 @@ export default function ProductPageLuxury({ productId = 'art-1155' }) {
     return () => (mounted = false)
   }, [productId])
 
+  const isDivine = product && (product.title === 'Divine Tunes-11' || productId === 'art-1155')
+
   function handleMouse(e) {
     const r = heroRef.current?.getBoundingClientRect()
     if (!r) return setPos({ x: 0, y: 0 })
@@ -37,7 +39,7 @@ export default function ProductPageLuxury({ productId = 'art-1155' }) {
     <div className="container py-10">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Hero stage */}
-        <div className="lg:col-span-8 relative" onMouseMove={handleMouse} ref={heroRef}>
+        <div className={`${isDivine ? 'lg:col-span-7' : 'lg:col-span-8'} relative`} onMouseMove={handleMouse} ref={heroRef}>
           <div className="relative bg-black rounded-lg overflow-hidden" style={{ minHeight: 420 }}>
             <img src={product.images?.[0]} alt={product.title} className="w-full h-[48vh] md:h-[68vh] object-cover" />
 
@@ -49,14 +51,14 @@ export default function ProductPageLuxury({ productId = 'art-1155' }) {
           </div>
 
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
-            <h1 className="font-serif text-3xl">{product.title}</h1>
+            <h1 className="font-serif text-4xl md:text-5xl font-bold">{product.title}</h1>
             <div className="text-sm muted-text mt-1">by {product.artist}</div>
           </motion.div>
         </div>
 
         {/* Action bar / floating */}
-        <div className="lg:col-span-4">
-          <div className="glass-card p-5 rounded-xl shadow-deep">
+        <div className={`${isDivine ? 'lg:col-span-5 -mt-2 lg:-mt-0' : 'lg:col-span-4'}`}>
+          <div className="glass-card p-5 rounded-xl shadow-deep h-full">
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-sm muted-text">Price</div>
@@ -80,7 +82,11 @@ export default function ProductPageLuxury({ productId = 'art-1155' }) {
       <div className="mt-8 bento-grid">
         <motion.div layout className="glass-card p-6 rounded-xl">
           <h3 className="font-semibold mb-2">The Story</h3>
-          <ReadMore collapsedHeight={120} className="muted-text">{product.story}</ReadMore>
+          {isDivine ? (
+            <div className="muted-text">{product.story}</div>
+          ) : (
+            <ReadMore collapsedHeight={120} className="muted-text">{product.story}</ReadMore>
+          )}
         </motion.div>
 
         <motion.div layout className="glass-card p-6 rounded-xl">
@@ -115,7 +121,11 @@ export default function ProductPageLuxury({ productId = 'art-1155' }) {
             {tab === 'story' && (
               <motion.div key="story" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="glass-card p-6 rounded-xl">
                 <h4 className="font-semibold">Story</h4>
-                <ReadMore collapsedHeight={160} className="muted-text mt-2">{product.story}</ReadMore>
+                {isDivine ? (
+                  <div className="muted-text mt-2">{product.story}</div>
+                ) : (
+                  <ReadMore collapsedHeight={160} className="muted-text mt-2">{product.story}</ReadMore>
+                )}
               </motion.div>
             )}
 

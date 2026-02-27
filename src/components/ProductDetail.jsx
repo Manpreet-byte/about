@@ -7,6 +7,7 @@ import RelatedWorks from './RelatedWorks'
 import ArtistBioDetailed from './ArtistBioDetailed'
 import ArtworkStatement from './ArtworkStatement'
 import ReadMore from './ReadMore'
+import ArtistCardMini from './ArtistCardMini'
 
 const ART_SRC = 'https://zigguratss.com/assets/upload/art-1155.jpg'
 
@@ -29,7 +30,30 @@ export default function ProductDetail() {
   }, [added])
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+    <div className="relative">
+      {/* Left Side Text - DIVINE */}
+      <div className="hidden lg:flex fixed left-4 top-1/2 -translate-y-1/2 z-10 h-screen items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          {['D', 'I', 'V', 'I', 'N', 'E'].map((letter, idx) => (
+            <span key={idx} className="text-9xl font-extrabold leading-none" style={{ fontFamily: 'serif', color: '#b8935f' }}>
+              {letter}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Right Side Text - TUNES */}
+      <div className="hidden lg:flex fixed right-4 top-1/2 -translate-y-1/2 z-10 h-screen items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          {['T', 'U', 'N', 'E', 'S'].map((letter, idx) => (
+            <span key={idx} className="text-9xl font-extrabold leading-none" style={{ fontFamily: 'serif', color: '#b8935f' }}>
+              {letter}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-start px-4 md:px-6 lg:px-0">
       {/* Left - Artwork */}
       <div className="space-y-6">
         <div className="relative bg-white rounded-lg overflow-hidden border border-slate-200">
@@ -44,22 +68,22 @@ export default function ProductDetail() {
             onClick={() => setOpen(true)}
           />
 
-          <div className="absolute top-4 right-4 flex items-center space-x-3">
-            <button aria-label="Zoom" onClick={() => setOpen(true)} className="p-2 bg-white rounded-md shadow-sm border border-slate-200">
-              <ZoomIn size={18} />
+          <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex items-center space-x-2 sm:space-x-3">
+            <button aria-label="Zoom" onClick={() => setOpen(true)} className="p-1.5 sm:p-2 bg-white rounded-md shadow-sm border-2 border-[#c9a96e] hover:bg-[#c9a96e] hover:border-[#a87d4d] transition-all">
+              <ZoomIn size={16} className="sm:w-[18px] sm:h-[18px]" />
             </button>
-            <button aria-label="Fullscreen" onClick={() => setOpen(true)} className="p-2 bg-white rounded-md shadow-sm border border-slate-200">
-              <Maximize2 size={18} />
+            <button aria-label="Fullscreen" onClick={() => setOpen(true)} className="p-1.5 sm:p-2 bg-white rounded-md shadow-sm border-2 border-[#c9a96e] hover:bg-[#c9a96e] hover:border-[#a87d4d] transition-all">
+              <Maximize2 size={16} className="sm:w-[18px] sm:h-[18px]" />
             </button>
           </div>
         </div>
 
-        <div className="flex space-x-3 sm:space-x-4">
+        <div className="flex space-x-2 sm:space-x-3 md:space-x-4 overflow-x-auto pb-2 scrollbar-hide">
           {THUMBS.map((t, i) => (
             <button
               key={`${t.src}-${i}`}
               onClick={() => setActive(i)}
-              className={`w-20 h-14 sm:w-28 sm:h-20 rounded-md overflow-hidden border ${i === active ? 'border-slate-800' : 'border-slate-200'} bg-white`}
+              className={`flex-shrink-0 w-16 h-12 sm:w-20 sm:h-14 md:w-28 md:h-20 rounded-md overflow-hidden border-2 ${i === active ? 'border-[#c9a96e]' : 'border-slate-200'} bg-white hover:border-[#c9a96e] transition-all`}
               aria-label={`Thumbnail ${i + 1}`}
             >
               <img src={t.src} alt={t.alt} className="w-full h-full object-cover" />
@@ -70,8 +94,8 @@ export default function ProductDetail() {
         <AnimatePresence>
           {open && (
             <motion.div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <motion.div className="relative max-w-6xl w-[92%] h-[84%] bg-white rounded-lg overflow-hidden" initial={{ scale: 0.98 }} animate={{ scale: 1 }} exit={{ scale: 0.98 }}>
-                <button onClick={() => setOpen(false)} className="absolute top-4 right-4 z-50 p-2 rounded bg-white/90 border border-slate-200">
+              <motion.div className="relative max-w-6xl w-[95%] sm:w-[92%] h-[80%] sm:h-[84%] bg-white rounded-lg overflow-hidden" initial={{ scale: 0.98 }} animate={{ scale: 1 }} exit={{ scale: 0.98 }}>
+                <button onClick={() => setOpen(false)} className="absolute top-2 right-2 sm:top-4 sm:right-4 z-50 p-1.5 sm:p-2 rounded bg-white/90 border-2 border-[#c9a96e] hover:bg-[#c9a96e] hover:border-[#a87d4d] transition-all">
                   <X size={18} />
                 </button>
                 <img src={THUMBS[active].src} alt="fullscreen" className="w-full h-full object-contain bg-white" />
@@ -91,46 +115,77 @@ export default function ProductDetail() {
 
         <RelatedWorks />
 
-        <ArtistBioDetailed />
+        {/* Artist Section */}
+        <motion.div 
+          className="mt-16"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.h3 
+            className="text-4xl md:text-5xl font-serif font-extrabold text-slate-900 mb-8 flex items-center gap-4 group"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <motion.span 
+              className="h-1 bg-gradient-to-r from-slate-900 via-emerald-600 to-teal-600 group-hover:from-emerald-600 group-hover:to-teal-600 transition-all duration-500 rounded-full shadow-lg"
+              initial={{ width: 0 }}
+              whileInView={{ width: 60 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.4 }}
+              whileHover={{ width: 80, height: 6 }}
+            ></motion.span>
+            <motion.span 
+              className="group-hover:text-emerald-600 transition-colors duration-300"
+              whileHover={{ scale: 1.05, x: 10 }}
+            >
+              The Artist
+            </motion.span>
+          </motion.h3>
+          <ArtistCardMini name="Pradip Sarkar" image="https://res.cloudinary.com/dp2e8mfvm/image/upload/v1753511549/kwcnlfdzx5kebvxrr1gz.jpg" location="Mumbai, India" />
+        </motion.div>
       </div>
 
       {/* Right - Sticky Sidebar */}
-      <aside className="md:sticky md:top-24">
+      <aside className="md:sticky md:top-0">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-md bg-white p-6 rounded-xl border border-slate-200 text-slate-900 shadow-deep"
+          className="w-full bg-white p-4 sm:p-6 rounded-xl border border-slate-200 text-slate-900 shadow-deep"
         >
-          <h1 className="font-serif text-3xl">Divine Tunes-11</h1>
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold">Divine Tunes-11</h1>
           <a href="#" className="text-sm text-slate-600 block mt-2 hover:underline">Pradip Sarkar</a>
 
           <div className="mt-6">
             <div className="text-sm text-slate-500">Price</div>
-            <div className="text-2xl font-semibold mt-1">₹1,18,300 <span className="text-sm text-slate-500 font-normal">($1,577.33)</span></div>
+            <div className="text-xl sm:text-2xl font-semibold mt-1">₹1,18,300 <span className="text-xs sm:text-sm text-slate-500 font-normal">($1,577.33)</span></div>
             <div className="text-xs text-slate-500 mt-1">Tax included</div>
           </div>
 
-          <div className="mt-4 space-y-2 text-sm">
-            <div className="flex items-center space-x-2 text-slate-700"><CheckCircle size={16} /> <span>Certificate of Authenticity Included</span></div>
-            <div className="flex items-center space-x-2 text-slate-700"><Truck size={16} /> <span>Free Worldwide Shipping</span></div>
-            <div className="flex items-center space-x-2 text-slate-700"><Share2 size={16} /> <span>Share Artwork</span></div>
+          <div className="mt-4 space-y-2 text-xs sm:text-sm">
+            <div className="flex items-center space-x-2 text-slate-700"><CheckCircle size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Certificate of Authenticity Included</span></div>
+            <div className="flex items-center space-x-2 text-slate-700"><Truck size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Free Worldwide Shipping</span></div>
+            <div className="flex items-center space-x-2 text-slate-700"><Share2 size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Share Artwork</span></div>
           </div>
 
-          <div className="mt-6 flex space-x-3">
-            <button className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-slate-900 text-white rounded-lg font-semibold">
-              <ShoppingCart size={16} /> Add to Cart
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <button className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-sm sm:text-base">
+              <ShoppingCart size={16} /> <span>Add to Cart</span>
             </button>
-            <button className="px-4 py-3 border border-slate-200 rounded-lg text-slate-900 font-semibold bg-white">
-              <CreditCard size={16} /> Buy Now
+            <button className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-3 border-2 border-[#c9a96e] rounded-lg text-[#c9a96e] hover:bg-[#c9a96e] hover:text-white font-semibold bg-white transition-all text-sm sm:text-base">
+              <CreditCard size={16} /> <span>Buy Now</span>
             </button>
           </div>
 
           <div className="mt-6">
-            <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-              <button onClick={() => setTab('about')} className={`text-sm py-2 ${tab === 'about' ? 'font-semibold' : 'text-slate-600'}`}>About the Artwork</button>
-              <button onClick={() => setTab('artist')} className={`text-sm py-2 ${tab === 'artist' ? 'font-semibold' : 'text-slate-600'}`}>Artist Bio</button>
-              <button onClick={() => setTab('shipping')} className={`text-sm py-2 ${tab === 'shipping' ? 'font-semibold' : 'text-slate-600'}`}>Shipping & Returns</button>
+            <div className="flex items-center gap-2 sm:gap-3 border-b border-slate-100 pb-4 overflow-x-auto">
+              <button onClick={() => setTab('about')} className={`text-xs sm:text-sm py-2 whitespace-nowrap transition-colors ${tab === 'about' ? 'font-semibold text-[#c9a96e]' : 'text-slate-600 hover:text-[#c9a96e]'}`}>About the Artwork</button>
+              <button onClick={() => setTab('artist')} className={`text-xs sm:text-sm py-2 whitespace-nowrap transition-colors ${tab === 'artist' ? 'font-semibold text-[#c9a96e]' : 'text-slate-600 hover:text-[#c9a96e]'}`}>Artist Bio</button>
+              <button onClick={() => setTab('shipping')} className={`text-xs sm:text-sm py-2 whitespace-nowrap transition-colors ${tab === 'shipping' ? 'font-semibold text-[#c9a96e]' : 'text-slate-600 hover:text-[#c9a96e]'}`}>Shipping & Returns</button>
             </div>
 
             <div className="mt-4 text-sm text-slate-700">
@@ -153,32 +208,28 @@ export default function ProductDetail() {
                     <div className="col-span-full"><span className="font-semibold">Delivery:</span> Stretched</div>
                   </div>
 
-                  <ReadMore collapsedHeight={120}>
-                    <div className="mt-2">This piece is part of the 'DIVINE TUNES' series — a saga of urge whereby depicted deeds inspire others. Love, affection, innocence, bonding and festivity are the root of the sonata that created this ambiance of expression and effect. Art in itself is the final message.</div>
-                  </ReadMore>
+                  <div className="mt-2">This piece is part of the 'DIVINE TUNES' series — a saga of urge whereby depicted deeds inspire others. Love, affection, innocence, bonding and festivity are the root of the sonata that created this ambiance of expression and effect. Art in itself is the final message.</div>
 
-                  <ArtworkStatement title="Lady and Butterflies">
-                    <ReadMore collapsedHeight={200}>
-                      <div className="space-y-3">
-                        <motion.button onClick={() => setAdded(true)} whileTap={{ scale: 0.96 }} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-slate-900 text-white rounded-lg font-semibold">
-                          <ShoppingCart size={16} /> {added ? 'Added' : 'Add to Cart'}
-                        </motion.button>
-                        <motion.button whileHover={{ scale: 1.02 }} className="px-4 py-3 border border-slate-200 rounded-lg text-slate-900 font-semibold bg-white">
-                          <CreditCard size={16} /> Buy Now
-                        </motion.button>
-                        <p>To further enhance the connection with nature, I have included three butterflies in the painting. Resplendent in darker shades of purple and pink, they flutter gracefully around the woman’s face. These ethereal creatures symbolize the delicate balance of life and the interconnectedness between all living beings.</p>
+                  <ArtworkStatement title="Lady and Butterflies" defaultOpen={true}>
+                    <div className="space-y-3">
+                      <motion.button onClick={() => setAdded(true)} whileTap={{ scale: 0.96 }} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-sm sm:text-base">
+                        <ShoppingCart size={16} /> <span>{added ? 'Added' : 'Add to Cart'}</span>
+                      </motion.button>
+                      <motion.button whileHover={{ scale: 1.02 }} className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-[#c9a96e] rounded-lg text-[#c9a96e] hover:bg-[#c9a96e] hover:text-white font-semibold bg-white transition-all text-sm sm:text-base">
+                        <CreditCard size={16} /> <span>Buy Now</span>
+                      </motion.button>
+                      <p>To further enhance the connection with nature, I have included three butterflies in the painting. Resplendent in darker shades of purple and pink, they flutter gracefully around the woman’s face. These ethereal creatures symbolize the delicate balance of life and the interconnectedness between all living beings.</p>
 
-                        <p>“Lady and Butterflies” belongs to the series “In Harmony with Nature.” This collection explores the profound connection and interdependence between humans and the natural world. Through my art, I strive to inspire viewers to embrace compassion, appreciate the beauty of nature, and live in harmony with our surroundings.</p>
+                      <p>“Lady and Butterflies” belongs to the series “In Harmony with Nature.” This collection explores the profound connection and interdependence between humans and the natural world. Through my art, I strive to inspire viewers to embrace compassion, appreciate the beauty of nature, and live in harmony with our surroundings.</p>
 
-                        <h5 className="font-semibold">Capturing the Awe-Inspiring Connection</h5>
-                        <p>With “Lady and Butterflies”, I aimed to capture the profound and awe-inspiring connection between humans and nature. The woman’s gentle smile and loving gaze reflect her appreciation for the beauty that surrounds her. It is a reminder that we, too, can experience this sense of wonder and unity by embracing our role as caretakers of the earth.</p>
+                      <h5 className="font-extrabold text-xl">Capturing the Awe-Inspiring Connection</h5>
+                      <p>With “Lady and Butterflies”, I aimed to capture the profound and awe-inspiring connection between humans and nature. The woman’s gentle smile and loving gaze reflect her appreciation for the beauty that surrounds her. It is a reminder that we, too, can experience this sense of wonder and unity by embracing our role as caretakers of the earth.</p>
 
-                        <h5 className="font-semibold">Living in Harmony with Nature</h5>
-                        <p>Through this artwork, I hope to convey the importance of living in harmony with nature. Our actions, both individually and collectively, reverberate through the delicate balance of ecosystems. By fostering empathy for all creatures, we can mitigate the negative impacts of human activities and strive towards a more sustainable coexistence.</p>
+                      <h5 className="font-extrabold text-xl">Living in Harmony with Nature</h5>
+                      <p>Through this artwork, I hope to convey the importance of living in harmony with nature. Our actions, both individually and collectively, reverberate through the delicate balance of ecosystems. By fostering empathy for all creatures, we can mitigate the negative impacts of human activities and strive towards a more sustainable coexistence.</p>
 
-                        <p>In this series, I use symmetrical forms—squares, rectangles, checks, and butterflies—to cover the human figures. These geometric shapes represent the pursuit of perfection and balance, encapsulating the aspirations and struggles we all face as individuals striving for fulfillment.</p>
-                      </div>
-                    </ReadMore>
+                      <p>In this series, I use symmetrical forms—squares, rectangles, checks, and butterflies—to cover the human figures. These geometric shapes represent the pursuit of perfection and balance, encapsulating the aspirations and struggles we all face as individuals striving for fulfillment.</p>
+                    </div>
                   </ArtworkStatement>
                 </div>
               )}
@@ -211,6 +262,7 @@ export default function ProductDetail() {
           </div>
         </motion.div>
       </aside>
+    </div>
     </div>
   )
 }

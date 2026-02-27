@@ -361,7 +361,7 @@ const ArtworkCard = ({ artwork, index }) => {
 
       {/* Content */}
       <div className="flex-1 p-5 sm:p-6 flex flex-col">
-        <h3 className="font-serif text-xl sm:text-2xl text-gallery-dark mb-2 group-hover:text-gallery-accent transition-colors duration-300">
+        <h3 className="font-serif text-2xl sm:text-3xl font-bold text-gallery-dark mb-2 group-hover:text-gallery-accent transition-colors duration-300">
           {artwork.title}
         </h3>
         
@@ -675,7 +675,7 @@ const TeamCard = ({ member, index }) => {
           </div>
 
           <div className="text-center relative z-10">
-            <h3 className="font-serif text-lg sm:text-xl text-gallery-dark mb-1 group-hover:text-gallery-accent transition-colors duration-300">
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-gallery-dark mb-1 group-hover:text-gallery-accent transition-colors duration-300">
               {member.name}
             </h3>
             <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-gallery-accent mb-4">
@@ -787,7 +787,7 @@ const ValuesSection = () => (
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-full border border-gallery-accent/20 text-gallery-accent mb-5 group-hover:bg-gallery-accent group-hover:text-gallery-dark transition-all duration-500">
               {val.icon}
             </div>
-            <h4 className="font-serif text-lg text-gallery-dark mb-2">
+            <h4 className="font-serif text-xl font-bold text-gallery-dark mb-2">
               {val.title}
             </h4>
             <p className="font-sans text-sm text-gallery-muted leading-relaxed">
@@ -1145,7 +1145,7 @@ const ArtworksBriefSection = () => (
           <RevealOnScroll key={form.name}>
             <div className="flex flex-col items-center bg-white/70 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 group cursor-pointer" data-magnetic>
               <div className="mb-4">{form.icon}</div>
-              <h4 className="font-serif text-xl text-gallery-dark mb-2 group-hover:text-gallery-accent transition-colors duration-300">{form.name}</h4>
+              <h4 className="font-serif text-2xl font-bold text-gallery-dark mb-2 group-hover:text-gallery-accent transition-colors duration-300">{form.name}</h4>
               <p className="font-sans text-sm text-gallery-muted text-center">{form.desc}</p>
             </div>
           </RevealOnScroll>

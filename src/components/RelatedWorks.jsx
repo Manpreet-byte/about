@@ -11,7 +11,7 @@ const WORKS = [
 export default function RelatedWorks() {
   return (
     <div className="mt-10">
-      <h3 className="text-lg font-semibold mb-4 text-slate-900">Related Works</h3>
+      <h3 className="text-2xl font-extrabold mb-4 text-slate-900">Related Works</h3>
       <div className="flex space-x-4">
         {WORKS.map((w) => (
           <div key={w.title} className="w-44 bg-white rounded-lg overflow-hidden border border-slate-200">
