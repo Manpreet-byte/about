@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ZoomIn, Maximize2, ShoppingCart, CreditCard, Truck, CheckCircle, X, Share2 } from 'lucide-react'
+import { ZoomIn, Maximize2, ShoppingCart, CreditCard, Truck, CheckCircle, X, Share2, MessageCircle } from 'lucide-react'
 import ColorExtractor from './ColorExtractor'
 import ARPreview from './ARPreview'
 import RelatedWorks from './RelatedWorks'
@@ -172,12 +172,15 @@ export default function ProductDetail() {
             <div className="flex items-center space-x-2 text-slate-700"><Share2 size={14} className="sm:w-4 sm:h-4 flex-shrink-0" /> <span>Share Artwork</span></div>
           </div>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <button className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-sm sm:text-base">
-              <ShoppingCart size={16} /> <span>Add to Cart</span>
+          <div className="mt-6 flex flex-col sm:flex-row gap-2">
+            <button className="flex-[0.8] flex items-center justify-center gap-1.5 px-3 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-xs sm:text-sm">
+              <ShoppingCart size={15} /> <span>Add to Cart</span>
             </button>
-            <button className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-3 border-2 border-[#c9a96e] rounded-lg text-[#c9a96e] hover:bg-[#c9a96e] hover:text-white font-semibold bg-white transition-all text-sm sm:text-base">
-              <CreditCard size={16} /> <span>Buy Now</span>
+            <button className="flex-1 flex items-center justify-center gap-1.5 px-3 py-3 border-2 border-[#c9a96e] rounded-lg text-[#c9a96e] hover:bg-[#c9a96e] hover:text-white font-semibold bg-white transition-all text-xs sm:text-sm">
+              <MessageCircle size={15} /> <span>Make an Offer</span>
+            </button>
+            <button className="flex-1 flex items-center justify-center gap-1.5 px-3 py-3 bg-[#c9a96e] hover:bg-[#a87d4d] text-white rounded-lg font-semibold transition-all text-xs sm:text-sm">
+              <CreditCard size={15} /> <span>Buy Now</span>
             </button>
           </div>
 
