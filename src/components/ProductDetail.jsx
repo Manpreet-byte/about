@@ -15,6 +15,10 @@ const THUMBS = [
   { src: ART_SRC, alt: 'Divine Tunes-11 - main' },
   { src: ART_SRC, alt: 'Divine Tunes-11 - alternate' },
   { src: ART_SRC, alt: 'Divine Tunes-11 - room view' },
+    { src: "https://zigguratss.com/assets/upload/art-1155.jpg", alt: 'Divine Tunes-11 - room view' },
+  { src: "https://zigguratss.com/assets/upload/art-1155.jpg", alt: 'Divine Tunes-11 - room view' },
+  { src: "https://zigguratss.com/assets/upload/art-1155.jpg", alt: 'Divine Tunes-11 - room view' }
+
 ]
 
 export default function ProductDetail() {
