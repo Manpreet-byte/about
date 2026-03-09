@@ -6,9 +6,9 @@ import ColorPalette from './ColorPalette'
 const ART_SRC = 'https://zigguratss.com/assets/upload/art-1155.jpg'
 
 const IMAGES = [
-  { src: ART_SRC, alt: 'Divine Tunes-11 - view 1' },
-  { src: ART_SRC, alt: 'Divine Tunes-11 - view 2' },
-  { src: ART_SRC, alt: 'Divine Tunes-11 - view 3' },
+  { src: '/images/divine-close.svg', alt: 'Divine Tunes-11 - close-up' },
+  { src: '/images/divine-angle.svg', alt: 'Divine Tunes-11 - angle view' },
+  { src: '/images/divine-room.svg', alt: 'Divine Tunes-11 - room view' },
 ]
 
 export default function ImageGallery() {
@@ -34,6 +34,7 @@ export default function ImageGallery() {
       <div className="flex items-center space-x-4">
         {IMAGES.map((img, i) => (
           <button
+            type="button"
             key={`${img.src}-${i}`}
             onClick={() => setIndex(i)}
             className={`w-20 h-14 rounded-md overflow-hidden ring-1 ring-white/10 ${i === index ? 'ring-2 ring-gold-500' : ''}`}
